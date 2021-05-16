@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tpv/controladores/editarformulario.dart';
+import 'package:provider/provider.dart';
+import 'package:tpv/providers/carta_providers.dart';
 
 class DetallesProducto extends StatefulWidget {
+
+  const DetallesProducto({Key key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => DetallesProductoState();
@@ -12,7 +15,6 @@ class DetallesProductoState extends State<DetallesProducto> {
 
   @override
   Widget build(BuildContext context) {
-    final editable = context.dependOnInheritedWidgetOfExactType<EdicionFormulario>();
 
     return Container(
       color: Colors.white,
@@ -37,7 +39,7 @@ class DetallesProductoState extends State<DetallesProducto> {
             child: Column(
               children: <Widget>[
                 TextFormField(
-                  readOnly: editable.editable,
+                  readOnly: context.watch<CartaModificadores>().bloquearFormulario,
                   style: TextStyle(
                       fontFamily: 'Montserrat', fontStyle: FontStyle.normal),
                   initialValue: 'Tortilla de Patata',
@@ -48,7 +50,7 @@ class DetallesProductoState extends State<DetallesProducto> {
                 ),
                 SizedBox(height: 5,),
                 TextFormField(
-                  readOnly:editable.editable,
+                  readOnly:context.watch<CartaModificadores>().bloquearFormulario,
                   style: TextStyle(fontFamily: 'DancingScript', fontSize: 20),
                   keyboardType: TextInputType.multiline,
                   minLines: 3,
@@ -65,7 +67,7 @@ class DetallesProductoState extends State<DetallesProducto> {
                 ),
                 SizedBox(height: 5,),
                 TextFormField(
-                  readOnly:editable.editable,
+                  readOnly:context.watch<CartaModificadores>().bloquearFormulario,
                   style: TextStyle(fontFamily: 'Montserrat'),
                   initialValue: "5.50€",
                   decoration: InputDecoration(
