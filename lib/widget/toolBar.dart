@@ -40,9 +40,6 @@ class ToolBarState extends State<ToolBar>{
                 setState(() {
                   context.read<CartaModificadores>().cambiarValor();
                 });
-
-
-                //TODO Problema no se como llamar al metodo hacerEditable de la clase DetallesProductoState
               },
               child: Container(
                 decoration:
@@ -71,12 +68,7 @@ class ToolBarState extends State<ToolBar>{
               width: 40,
               child: Icon(Icons.search_rounded),
             ),
-            FloatingActionButton(
-                onPressed: (){
-                    null;
-                },
-                child: Icon(Icons.add_alert)
-            )
+
           ],
         ),
       ),

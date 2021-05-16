@@ -22,7 +22,7 @@ class Routes extends StatelessWidget{
           "/carta":(BuildContext context) => Carta(),
           "/formularioUsuario":(BuildContext context) => FichaUsuario(),
         },
-        initialRoute: _logueado ? "/carta": "/login",
+        initialRoute: _logueado ? "/login": "/login",
       //TODO cambiar pagina registrar por principal
     );
   }

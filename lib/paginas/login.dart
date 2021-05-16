@@ -1,7 +1,7 @@
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_session/flutter_session.dart';
 import 'package:flutter/material.dart';
 import 'package:tpv/controladores/accionesPrincipales.dart';
+import 'package:tpv/controladores/createSession.dart';
 import 'package:tpv/widget/inputFieldCustom.dart';
 
  class Login extends StatefulWidget{
@@ -87,7 +87,10 @@ class _LoginState extends State<Login> {
                                         // setState(() {
                                         //   position=-12;
                                         // });
+                                        CrearSesion().saveData(context);
+
                                         AccionesPrincipales.enlazar(context, '/menuPrincipal');
+
                                       },
                                       label: Text('Identificame'),
                                       icon: Icon(Icons.app_registration),

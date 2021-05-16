@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tpv/controladores/datosdeSesion.dart';
 import 'package:tpv/providers/carta_providers.dart';
 import 'package:tpv/widget/containerItemListRow.dart';
 import 'package:tpv/widget/detallesProducto.dart';
 import 'package:tpv/widget/toolBar.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_session/flutter_session.dart';
 
 class Carta extends StatefulWidget {
 
@@ -20,7 +22,8 @@ class CartaState extends State<Carta>{
 
   @override
   Widget build(BuildContext context) {
-
+;
+    
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -64,6 +67,13 @@ class CartaState extends State<Carta>{
                             scrollDirection: Axis.vertical,
                             children: <Widget>[
                               ItemListCartaRow("CocaCola"),
+                              // FutureBuilder(
+                              //     future: FlutterSession().get('myData'),
+                              //     builder: (context, snapshot) {
+                              //       return Text(snapshot.hasData
+                              //           ? snapshot.data['firstName']
+                              //           : 'Loading...');
+                              //     }),
                               Divider(),
                               ItemListCartaRow("Fanta Naranja"),
                               Divider(),
