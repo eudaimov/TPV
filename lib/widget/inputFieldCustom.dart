@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class InputCustom extends StatefulWidget{
+  TextEditingController controllerPassword;
+
+  InputCustom(this.controllerPassword);
+
   @override
   _InputCustomState createState() => _InputCustomState();
 
@@ -19,6 +23,7 @@ class _InputCustomState extends State<InputCustom>{
   @override
   Widget build(BuildContext context) {
     return  TextFormField(
+      controller: widget.controllerPassword,
       style: estilo,
       textAlign: TextAlign.center,
       autocorrect: false,

@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter_session/flutter_session.dart';
 import 'package:flutter/material.dart';
 import 'package:tpv/controladores/accionesPrincipales.dart';
@@ -20,10 +22,11 @@ class _LoginState extends State<Login> {
 
   bool mover = false;
   double position = -10;
-  //var mycontrollerpassword = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-
+        final controladorNombre = TextEditingController();
+        final controladorPassword = TextEditingController();
         return Scaffold(
           backgroundColor: Colors.orangeAccent[100],
           appBar: AppBar(
@@ -58,7 +61,9 @@ class _LoginState extends State<Login> {
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
                       children: <Widget>[
-                                TextField(style: estilo,
+                                TextField(
+                                  controller: controladorNombre,
+                                  style: estilo,
                                   textAlign: TextAlign.center,
                                   decoration:
                                     InputDecoration(
@@ -78,7 +83,7 @@ class _LoginState extends State<Login> {
 
                                 ),
                                 SizedBox(height: 10,),
-                                InputCustom(),
+                                InputCustom(controladorPassword),
                                 SizedBox(height: 10,),
                                 SizedBox(
                                   width: 200,
@@ -87,7 +92,9 @@ class _LoginState extends State<Login> {
                                         // setState(() {
                                         //   position=-12;
                                         // });
-                                        CrearSesion().saveData(context);
+                                        String nombre = controladorNombre.text;
+                                        String password = controladorPassword.text;
+                                        CrearSesion(nombre,"Garcia", password).saveData(context);
 
                                         AccionesPrincipales.enlazar(context, '/menuPrincipal');
 

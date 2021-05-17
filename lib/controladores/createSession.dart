@@ -5,8 +5,14 @@ import 'accionesPrincipales.dart';
 
 class CrearSesion{
 
+  String nombre;
+  String apellidos;
+  String password;
+
+  CrearSesion(this.nombre, this.apellidos, this.password);
+
    void  saveData(context) async {
-    UsuarioSesion usuarioSesion = UsuarioSesion(firstName: "Juan", secondName: "Garcia");
+    UsuarioSesion usuarioSesion = UsuarioSesion(firstName: this.nombre, secondName: "Garcia", password: this.password);
     await FlutterSession().set('myData', usuarioSesion);
   }
 
