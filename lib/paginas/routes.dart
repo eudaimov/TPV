@@ -12,6 +12,8 @@ class Routes extends StatefulWidget {
 }
 
 class RoutesState extends State<Routes> {
+  bool identificacion = false;
+  var token = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,12 +30,12 @@ class RoutesState extends State<Routes> {
   }
 
   Future<bool> comprobarSesion(context) async {
-    dynamic token = await FlutterSession().get("myData");
-    //TODO Quitar password es simplemente para falsear el login pero se necesita comprobar la identificación
-    if (token['firstName'] == "Felix" && token['password']=='1234') {
+    token = await FlutterSession().get("login");
+    if (token) {
+      print("Verdadero++++++++++++");
       return true;
     } else {
-      print("Falso");
+      print("Falso++++++++++");
       return false;
     }
   }

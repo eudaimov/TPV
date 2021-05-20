@@ -1,9 +1,13 @@
-import 'dart:html';
+//import 'dart:html';
+import 'dart:convert';
 
 import 'package:flutter_session/flutter_session.dart';
 import 'package:flutter/material.dart';
+import 'package:tpv/configuracion/configuraciones.dart';
 import 'package:tpv/controladores/accionesPrincipales.dart';
 import 'package:tpv/controladores/createSession.dart';
+import 'package:tpv/controladores/http/request.dart';
+import 'package:tpv/modelo/usuarioSesion.dart';
 import 'package:tpv/widget/inputFieldCustom.dart';
 
  class Login extends StatefulWidget{
@@ -87,16 +91,35 @@ class _LoginState extends State<Login> {
                                 SizedBox(height: 10,),
                                 SizedBox(
                                   width: 200,
-                                  child: ElevatedButton.icon(
-                                      onPressed: (){
+                                  child: ElevatedButton.icon (
+                                      onPressed: () async  {
                                         // setState(() {
                                         //   position=-12;
                                         // });
+                                        Peticiones miPeticion = Peticiones(Config.hostbase+"usuario/identificacion");
                                         String nombre = controladorNombre.text;
                                         String password = controladorPassword.text;
-                                        CrearSesion(nombre,"Garcia", password).saveData(context);
+                                        Map<String, String > usuario = {
+                                          "nick": "${controladorNombre.text}",
+                                          "password": "${controladorPassword.text}"
 
-                                        AccionesPrincipales.enlazar(context, '/menuPrincipal');
+                                        };
+                                        var resultado = await miPeticion.identificarse(usuario);
+                                        if(resultado!= "No identificado"){
+                                          Map<String, dynamic> userLogin = jsonDecode(resultado);
+                                          UsuarioSesion usuariosesion = UsuarioSesion();
+                                          usuariosesion.fromJson(userLogin);
+                                          CrearSesion().userSession(context, usuariosesion);
+                                          CrearSesion().activeSession(context);
+                                          // dynamic token = await FlutterSession().get("userLogin");
+                                          // print('-----------------');
+                                          // print(token['numeroTelefono']);
+                                          AccionesPrincipales.enlazar(context, '/menuPrincipal');
+                                        }else{
+                                          CrearSesion().offSession(context);
+                                        }
+
+
 
                                       },
                                       label: Text('Identificame'),
