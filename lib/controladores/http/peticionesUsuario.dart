@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:tpv/providers/carta_providers.dart';
 class Peticiones {
 
   Map<String, String> cuerpo;
@@ -15,7 +16,8 @@ class Peticiones {
         body: jsonEncode(usuario),
         headers: {"Content-Type": "application/json"}
     );
-    print('Response status: ${response.statusCode}');
+    //print('Response status: ${response.statusCode}');
+
     return response.body;
   }
 
@@ -27,7 +29,6 @@ class Peticiones {
         headers: {"Content-Type": "application/json"}
         );
       //print('Response status: ${response.statusCode}');
-
     return response.body;
   }
   Future<String> peticionPut() async {

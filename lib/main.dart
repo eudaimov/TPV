@@ -9,11 +9,13 @@ import 'package:tpv/providers/carta_providers.dart';
 void main() {
   runApp(
       MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => CartaModificadores()),
-          ],
-      child: Routes()
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) =>CartaModificadores(),
+          )
+        ],
+        child: Routes()
       )
-      );
+    );
 }
 

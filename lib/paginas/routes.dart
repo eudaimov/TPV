@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
 import 'package:tpv/paginas/usuario.dart';
 
-import 'carta.dart';
+import 'carta/carta.dart';
 import 'login.dart';
 import 'menuPrincipal.dart';
 
@@ -13,6 +13,7 @@ class Routes extends StatefulWidget {
 
 class RoutesState extends State<Routes> {
   bool identificacion = false;
+
   var token = false;
   @override
   Widget build(BuildContext context) {
@@ -25,17 +26,15 @@ class RoutesState extends State<Routes> {
         "/carta": (BuildContext context) => redireccionamiento(Carta()),
         "/formularioUsuario": (BuildContext context) => redireccionamiento(FichaUsuario()),
       },
-      initialRoute: "/login",
+      initialRoute: "/login" ,
     );
   }
 
   Future<bool> comprobarSesion(context) async {
     token = await FlutterSession().get("login");
     if (token) {
-      print("Verdadero++++++++++++");
       return true;
     } else {
-      print("Falso++++++++++");
       return false;
     }
   }
@@ -46,7 +45,8 @@ class RoutesState extends State<Routes> {
         builder: (BuildContext context, snapshot) {
           if (snapshot.data != null) {
             if (snapshot.data) {
-              return posible;
+              return 
+                posible;
             } else {
               return Login();
             }

@@ -5,7 +5,7 @@ import 'package:tpv/widget/containerPrueba.dart';
 class MenuPrincipal extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-
+    tag: "Menu principal";
     return Scaffold(
       appBar: AppBar(
         title: Text("Menu principal"),

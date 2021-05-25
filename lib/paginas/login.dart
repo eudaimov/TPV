@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:tpv/configuracion/configuraciones.dart';
 import 'package:tpv/controladores/accionesPrincipales.dart';
 import 'package:tpv/controladores/createSession.dart';
-import 'package:tpv/controladores/http/request.dart';
+import 'package:tpv/controladores/http/peticionesUsuario.dart';
 import 'package:tpv/modelo/usuarioSesion.dart';
 import 'package:tpv/widget/inputFieldCustom.dart';
 
@@ -116,6 +116,17 @@ class _LoginState extends State<Login> {
                                           // print(token['numeroTelefono']);
                                           AccionesPrincipales.enlazar(context, '/menuPrincipal');
                                         }else{
+                                          final snackBar = SnackBar(content:
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Icon(Icons.thumb_down, color: Colors.red,),
+                                              Text("   Usuario no registrado")
+                                            ],
+                                          ),
+                                            backgroundColor: Color.fromRGBO(10, 10, 10, 0.3),
+                                          );
+                                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                           CrearSesion().offSession(context);
                                         }
 
