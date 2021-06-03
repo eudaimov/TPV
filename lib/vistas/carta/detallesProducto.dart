@@ -14,9 +14,7 @@ class DetallesProducto extends StatelessWidget {
       builder: (_, modificador, __)=> Container(
         color: Colors.white,
         alignment: Alignment.center,
-        child: ListView(
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
+        child: Column(
           children: <Widget>[
             Row(
               children: <Widget>[
@@ -34,6 +32,9 @@ class DetallesProducto extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 60),
               child: Column(
                 children: <Widget>[
+                  FloatingActionButton(
+                      onPressed: ()=>null,
+                  child: Icon(Icons.camera_enhance_rounded),),
                   TextFormField(
                     controller: modificador.textEditingControllerProducto,
                     readOnly: modificador.bloquearFormulario,

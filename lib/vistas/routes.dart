@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
-import 'package:tpv/paginas/usuario.dart';
+import 'package:tpv/vistas/usuario.dart';
 
 import 'carta/carta.dart';
 import 'login.dart';

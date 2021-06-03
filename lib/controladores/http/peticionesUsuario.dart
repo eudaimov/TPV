@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:tpv/providers/carta_providers.dart';
+import 'package:tpv/configuracion/configuraciones.dart';
+
 class Peticiones {
 
   Map<String, String> cuerpo;
@@ -10,14 +10,16 @@ class Peticiones {
   Peticiones(this.url);
 
   Future<String> identificarse(Map<String,String> usuario) async {
+    print(jsonDecode(jsonEncode(usuario)));
     var url = Uri.parse(this.url);
+
     var response = await http.post(
         url,
         body: jsonEncode(usuario),
         headers: {"Content-Type": "application/json"}
     );
     //print('Response status: ${response.statusCode}');
-
+    print("La respuesta es "+ response.body);
     return response.body;
   }
 
