@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tpv/configuracion/configuraciones.dart';
+import 'package:tpv/controladores/http/peticionesCarta.dart';
+import 'package:tpv/controladores/responsive.dart';
 import 'package:tpv/modelo/productojson.dart';
 import 'package:tpv/providers/carta_providers.dart';
 import 'package:provider/provider.dart';
+import 'package:tpv/vistas/carta/detallesProducto.dart';
 
 class ItemListCartaRow extends StatefulWidget{
   Productojson miproducto;
@@ -27,12 +31,24 @@ class _ItemListCartaRowState extends State<ItemListCartaRow> {
       child: GestureDetector(
 
         onTap: (){
+          modificador.selectedFile =null;
           modificador.idItem = widget.idItem;
           modificador.idProducto = widget.miproducto.id;
           modificador.textEditingControllerProducto.text= widget.miproducto.producto;
           modificador.textEditingControllerIngredientes.text= widget.miproducto.ingrediente;
           modificador.textEditingControllerCategorias.text = widget.miproducto.categorias;
           modificador.textEditingControllerPrecio.text = widget.miproducto.precio.toString();
+          modificador.textEditingControllerRutaImagen.text = widget.miproducto.rutaImagen;
+          modificador.imagen =  Image.network(Config.hostbase+"productos/imagen/"+widget.miproducto.rutaImagen);
+          if(Responsive.isMobile(context)) {
+            Navigator.push( context, MaterialPageRoute(builder: (context) =>
+                Scaffold(
+                    appBar: AppBar(),
+                    body: DetallesProducto())));
+          }
+
+
+
 
         },
         child: Container(

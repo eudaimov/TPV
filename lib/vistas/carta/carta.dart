@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tpv/controladores/responsive.dart';
 import 'package:tpv/providers/carta_providers.dart';
 
-import 'columnElements.dart';
+import 'column.dart';
 import 'detallesProducto.dart';
 import 'toolBar.dart';
 
@@ -32,7 +32,7 @@ class Carta extends StatelessWidget {
             },
         child: Icon(Icons.settings),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButtonLocation: Responsive.isMobile(context)?FloatingActionButtonLocation.miniEndFloat: FloatingActionButtonLocation.miniEndTop,
       body: Responsive(
         desktop:
         Column(children: <Widget>[
@@ -42,7 +42,6 @@ class Carta extends StatelessWidget {
                   .mostrarBarradeHerramientasPrincipal)),
           Expanded(
             child: Container(
-              color: Colors.yellowAccent,
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +51,7 @@ class Carta extends StatelessWidget {
                         child: Container(
                             padding: EdgeInsets.symmetric(horizontal: 15),
                             width: double.infinity,
-                            color: Colors.grey,
+                            //color: Colors.grey,
                             child: ColumnElements()
                         )
                     ),
@@ -64,12 +63,13 @@ class Carta extends StatelessWidget {
             ),
           ),
         ]),
-        tablet:         Column(children: <Widget>[
-          Consumer<CartaModificadores>(
+        tablet:
+          Column(children: <Widget>[
+            Consumer<CartaModificadores>(
               builder: (_, modificador, __) => ToolBar(context
                   .read<CartaModificadores>()
                   .mostrarBarradeHerramientasPrincipal)),
-          Expanded(
+            Expanded(
             child: Container(
               color: Colors.yellowAccent,
               child: Row(
@@ -93,7 +93,8 @@ class Carta extends StatelessWidget {
             ),
           ),
         ]),
-        mobile: Column(children: <Widget>[
+        mobile:
+        Column(children: <Widget>[
           Consumer<CartaModificadores>(
               builder: (_, modificador, __) => ToolBar(context
                   .read<CartaModificadores>()

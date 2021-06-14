@@ -10,9 +10,7 @@ void main() {
   runApp(
       MultiProvider(
         providers: [
-          ChangeNotifierProvider(
-            create: (_) =>CartaModificadores(),
-          )
+          ChangeNotifierProvider(create: (_) =>CartaModificadores(), )
         ],
         child: Routes()
       )

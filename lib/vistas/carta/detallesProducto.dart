@@ -1,10 +1,28 @@
+import 'dart:convert';
+import 'dart:html' as html;
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tpv/controladores/http/peticionesCarta.dart';
 import 'package:tpv/providers/carta_providers.dart';
+import 'package:image_picker/image_picker.dart';
 
-class DetallesProducto extends StatelessWidget {
+
+
+
+
+class DetallesProducto extends StatefulWidget {
 
   const DetallesProducto({Key key}) : super(key: key);
+
+  @override
+  _DetallesProductoState createState() => _DetallesProductoState();
+}
+
+class _DetallesProductoState extends State<DetallesProducto> {
+  Image archivoImagen;
+  List<int> _selectedFile;
+  GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
 
   @override
@@ -22,8 +40,9 @@ class DetallesProducto extends StatelessWidget {
                   child: Container(
                     height: 300,
                     width: 300,
-                    child: Icon(Icons.restaurant_menu, size: 150)
-                    //Image.asset('assets/tortilla.jpg', width: 150, height: 150),
+                    child: Center(
+                      child:  modificador.imagen //!= null ? modificador.imagen : Icon(Icons.restaurant, size: 150,)
+                    ),
                   ),
                 )
               ],
@@ -32,9 +51,15 @@ class DetallesProducto extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 60),
               child: Column(
                 children: <Widget>[
-                  FloatingActionButton(
-                      onPressed: ()=>null,
-                  child: Icon(Icons.camera_enhance_rounded),),
+                  Form(
+                    key: _formKey,
+                    autovalidate: true,
+                    child: FloatingActionButton(
+                        onPressed: ()  {
+                          seleccionarPicker();
+                        },
+                    child: Icon(Icons.camera_enhance_rounded),),
+                  ),
                   TextFormField(
                     controller: modificador.textEditingControllerProducto,
                     readOnly: modificador.bloquearFormulario,
@@ -96,13 +121,14 @@ class DetallesProducto extends StatelessWidget {
 
   }
 
-  // @override
-  // void initState() {
-  //   _controllerProducto = TextEditingController();
-  // }
-  //
-  // @override
-  // void dispose() {
-  //   _controllerProducto.dispose();
-  // }
+  void seleccionarPicker()async{
+    final modificador  = Provider.of<CartaModificadores>(context, listen: false);
+    final picker =  await ImagePicker().getImage(source: ImageSource.gallery);
+    setState(() {
+      modificador.imagen = Image.network(picker.path);
+
+    });
+    modificador.selectedFile = await picker.readAsBytes();
+  }
+
 }
