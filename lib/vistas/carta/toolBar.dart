@@ -85,10 +85,21 @@ class _ToolBarState extends State<ToolBar> {
               hoverColor: Colors.blue[700],
               child: Icon(Icons.delete_outline),
             ),
+            FloatingActionButton(
+              heroTag: "buscar",
+              onPressed: () {
+
+                  modificador.changeListProduct(modificador.textEditingControllerBusqueda.text);
+              },
+              hoverColor: Colors.blue[700],
+              child: Icon(Icons.search),
+            ),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.only(right: Responsive.isMobile(context)?  10:80, left: 10),
                 child: TextFormField(
+                  controller: modificador.textEditingControllerBusqueda,
+                  textAlign: TextAlign.right,
                   decoration: InputDecoration(
                     suffixIcon: Icon(Icons.search),
                     hintText: "Producto a buscar",
@@ -100,9 +111,10 @@ class _ToolBarState extends State<ToolBar> {
                       borderSide: BorderSide(width: 3, color: Colors.blue),
                       borderRadius: BorderRadius.circular(15),
                     ),
-
-
                   ),
+                  onChanged: (text){
+                    //print(text);
+                    },
                 ),
               ),
             )

@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:tpv/widget/containerPrueba.dart';
+import 'package:tpv/vistas/widget/containerPrueba.dart';
+
 
 class MenuPrincipal extends StatelessWidget{
   @override

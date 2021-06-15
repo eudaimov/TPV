@@ -13,10 +13,12 @@ class CartaModificadores with ChangeNotifier {
   TextEditingController _textEditingControllerCategorias =  TextEditingController();
   TextEditingController _textEditingControllerPrecio =  TextEditingController();
   TextEditingController _textEditingControllerRutaImagen = TextEditingController();
+  TextEditingController _textEditingControllerBusqueda = TextEditingController();
   Image _imagen;
   List<int> _selectedFile;
   GlobalKey<AnimatedListState> _myListKey = GlobalKey<AnimatedListState>();
   List<Productojson> _miListadoProductos;
+  List<Productojson> _miListadoProductosfilter;
 
 
   bool get bloquearFormulario => _bloquearFormulario;
@@ -28,10 +30,15 @@ class CartaModificadores with ChangeNotifier {
   TextEditingController get textEditingControllerCategorias => _textEditingControllerCategorias;
   TextEditingController get textEditingControllerPrecio => _textEditingControllerPrecio;
   TextEditingController get textEditingControllerRutaImagen => _textEditingControllerRutaImagen;
+  TextEditingController get textEditingControllerBusqueda => _textEditingControllerBusqueda;
   Image get imagen => _imagen;
   List<int> get selectedFile =>_selectedFile;
   get myListKey => _myListKey;
-  List<Productojson> get milistadoProductos => _miListadoProductos;
+
+  List<Productojson> get miListadoProductos => _miListadoProductos;
+  List<Productojson> get miListadoProductosfilter  => _miListadoProductosfilter;
+
+
 
   set imagen(Image image){
     _imagen = image;
@@ -54,6 +61,15 @@ class CartaModificadores with ChangeNotifier {
   set milistadoProductos(List<Productojson> value) {
     _miListadoProductos = value;
   }
+  set miListadoProductosfilter(List<Productojson> value){
+    _miListadoProductosfilter = value;
+    notifyListeners();
+  }
+
+  void changeListProduct(String name){
+    _miListadoProductos = _miListadoProductos.where((element) => element.producto==name).toList();
+    notifyListeners();
+  }
 
 
   void mostrarOcultarBarra(){
@@ -74,6 +90,8 @@ class CartaModificadores with ChangeNotifier {
     _imagen = null;
      notifyListeners();
   }
+
+
 
 
 }

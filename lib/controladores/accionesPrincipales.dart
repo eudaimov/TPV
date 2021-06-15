@@ -62,7 +62,7 @@ class AccionesPrincipales{
                           .text
                   );
 
-                  modificador.milistadoProductos.removeAt(modificador.idItem);
+                  modificador.miListadoProductos.removeAt(modificador.idItem);
                   modificador.myListKey.currentState.removeItem(modificador.idItem, (context, animation)=>
                       ItemListCartaRow(myProduct,modificador.idItem, animation ),
 
@@ -160,7 +160,7 @@ class AccionesPrincipales{
                  .textEditingControllerRutaImagen
                  .text
          );
-         modificador.milistadoProductos.insert(0, myProduct);
+         modificador.miListadoProductos.insert(0, myProduct);
          modificador.myListKey.currentState.insertItem(0);
          modificador.resetFormulario();
        }
@@ -266,9 +266,9 @@ class AccionesPrincipales{
                .textEditingControllerRutaImagen
                .text
        );
-       modificador.milistadoProductos.removeAt(modificador.idItem);
+       modificador.miListadoProductos.removeAt(modificador.idItem);
        modificador.myListKey.currentState.removeItem(modificador.idItem, (context, animation)=> ItemListCartaRow(myProduct,modificador.idItem, animation));
-       modificador.milistadoProductos.insert(modificador.idItem, myProduct);
+       modificador.miListadoProductos.insert(modificador.idItem, myProduct);
        modificador.myListKey.currentState.insertItem(modificador.idItem);
        modificador.resetFormulario();
 

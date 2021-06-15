@@ -8,7 +8,8 @@ import 'package:tpv/controladores/accionesPrincipales.dart';
 import 'package:tpv/controladores/createSession.dart';
 import 'package:tpv/controladores/http/peticionesUsuario.dart';
 import 'package:tpv/modelo/usuarioSesion.dart';
-import 'package:tpv/widget/inputFieldCustom.dart';
+import 'package:tpv/vistas/widget/inputFieldCustom.dart';
+
 
 class Login extends StatefulWidget {
   @override

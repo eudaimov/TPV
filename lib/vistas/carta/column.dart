@@ -34,16 +34,18 @@ class _ColumnElementsState extends State<ColumnElements> {
                 List<Productojson> milistado = snapshot.data;
                 modificador.milistadoProductos = milistado;
 
-                return AnimatedList(
-                  padding: EdgeInsets.only(top:10, bottom: 10),
-                  key: modificador.myListKey,
-                  initialItemCount: modificador.milistadoProductos.length,
-                  itemBuilder: (context, index, animation){
-                    return ItemListCartaRow(modificador.milistadoProductos[index], index, animation);
-                  },
-                  controller: controllerScroll,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
+                return Consumer<CartaModificadores>(
+                  builder: (_, modificador, __)=>AnimatedList(
+                    padding: EdgeInsets.only(top:10, bottom: 10),
+                    key: modificador.myListKey,
+                    initialItemCount: modificador.miListadoProductos.length, //modificador.miListadoProductosfilter.length,
+                    itemBuilder: (context, index, animation){
+                      return ItemListCartaRow(modificador.miListadoProductos[index], index, animation);
+                    },
+                    controller: controllerScroll,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                  ),
                 );
               } else if(snapshot.hasError){
                   return Container(
