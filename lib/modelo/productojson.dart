@@ -1,52 +1,52 @@
 
 class Productojson {
   int _id;
-  String _producto;
-  String _ingrediente;
-  double _precio;
-  String _rutaImagen ;
-  dynamic _categorias;
+  String _productName;
+  String _ingredients;
+  double _price;
+  String _routeImage ;
+  dynamic _categories;
 
   int get id => _id;
-  String get producto => _producto;
-  String get ingrediente => _ingrediente;
-  String get rutaImagen => _rutaImagen;
-  double get precio => _precio;
-  dynamic get categorias => _categorias;
+  String get productName => _productName;
+  String get ingredients => _ingredients;
+  String get routeImage => _routeImage;
+  double get price => _price;
+  dynamic get categories => _categories;
 
   Productojson({
       int id, 
-      String producto, 
-      String ingrediente,
-      String rutaImagen,
-      double precio, 
-      dynamic categorias}){
+      String productName, 
+      String ingredients,
+      String routeImage,
+      double price, 
+      dynamic categories}){
         _id = id;
-        _producto = producto;
-        _ingrediente = ingrediente;
-        _rutaImagen = rutaImagen;
-        _precio = precio;
-        _categorias = categorias;
+        _productName = productName;
+        _ingredients = ingredients;
+        _routeImage = routeImage;
+        _price = price;
+        _categories = categories;
 }
 
   Productojson.fromJson(dynamic json) {
     _id = json["id"];
-    _producto = json["producto"];
-    _ingrediente = json["ingrediente"];
-    _rutaImagen = json["rutaImagen"];
-    _precio = json["precio"];
-    _categorias = json["categorias"];
+    _productName = json["productName"];
+    _ingredients = json["ingredients"];
+    _routeImage = json["routeImage"];
+    _price = json["price"];
+    _categories = json["categories"];
 
   }
 
   Map<String, dynamic> toJson() {
     var map = <String, dynamic>{};
     map["id"] = _id;
-    map["producto"] = _producto;
-    map["ingrediente"] = _ingrediente;
-    map["rutaImagen"] = _rutaImagen;
-    map["precio"] = _precio;
-    map["categorias"] = _categorias;
+    map["productName"] = _productName;
+    map["ingredients"] = _ingredients;
+    map["routeImage"] = _routeImage;
+    map["price"] = _price;
+    map["categories"] = _categories;
     return map;
   }
 

@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:ui';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:tpv/configuracion/configuraciones.dart';
 import 'package:tpv/modelo/productojson.dart';
@@ -36,10 +34,11 @@ class PeticionesCarta{
     request.fields['texto'] = "Imagen guardada";
 
     request.send().then((response) {
-      if (response.statusCode == 200) print("Uploaded!");
-      else{
-        print(response.statusCode);
-      }
+      if (response.statusCode == 200)
+        return "Uploaded!";
+      else
+        return response.statusCode;
+
     });
   }
 

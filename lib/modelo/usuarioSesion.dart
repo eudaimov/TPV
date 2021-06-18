@@ -1,5 +1,4 @@
 import 'dart:core';
-import 'package:flutter_session/flutter_session.dart';
 
 class UsuarioSesion {
 

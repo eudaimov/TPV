@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tpv/configuracion/configuraciones.dart';
-import 'package:tpv/controladores/accionesPrincipales.dart';
 import 'package:tpv/controladores/http/peticionesUsuario.dart';
 
 class FichaUsuario extends StatefulWidget {
@@ -30,7 +29,6 @@ class _FichaUsuarioState extends State<FichaUsuario> {
 
   @override
   Widget build(BuildContext context) {
-    tag: "UsuarioLogin";
     return Scaffold(
       appBar: AppBar(
         title: Text("TPV IN"),

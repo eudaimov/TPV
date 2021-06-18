@@ -110,8 +110,6 @@ class _LoginState extends State<Login> {
                           // });
                           Peticiones miPeticion = Peticiones(
                               Config.hostbase + "usuarios/identificacion");
-                          String nombre = controladorNombre.text;
-                          String password = controladorPassword.text;
                           Map<String, String> usuario = {
                             "nick": "${controladorNombre.text}",
                             "password": "${controladorPassword.text}"

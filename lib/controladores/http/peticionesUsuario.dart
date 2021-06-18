@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:tpv/configuracion/configuraciones.dart';
 
 class Peticiones {
 
@@ -65,9 +64,7 @@ class Peticiones {
 
     var url = Uri.parse(this.url+"?id="+id);
     var response = await http.delete(url);
-
-    // print('Response status: ${response.statusCode}');
-    // print('Response body: ${response.body}');
+   return response.statusCode.toString();
 
 
   }

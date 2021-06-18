@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:tpv/controladores/http/peticionesCarta.dart';
 import 'package:tpv/modelo/productojson.dart';
 
 class CartaModificadores with ChangeNotifier {
@@ -16,9 +17,12 @@ class CartaModificadores with ChangeNotifier {
   TextEditingController _textEditingControllerBusqueda = TextEditingController();
   Image _imagen;
   List<int> _selectedFile;
-  GlobalKey<AnimatedListState> _myListKey = GlobalKey<AnimatedListState>();
+
   List<Productojson> _miListadoProductos;
-  List<Productojson> _miListadoProductosfilter;
+  List<Productojson> _miListadoProductosScreen;
+  GlobalKey<AnimatedListState> _myListKey = GlobalKey<AnimatedListState>();
+  int cantidaditem = 0;
+
 
 
   bool get bloquearFormulario => _bloquearFormulario;
@@ -33,10 +37,10 @@ class CartaModificadores with ChangeNotifier {
   TextEditingController get textEditingControllerBusqueda => _textEditingControllerBusqueda;
   Image get imagen => _imagen;
   List<int> get selectedFile =>_selectedFile;
-  get myListKey => _myListKey;
-
   List<Productojson> get miListadoProductos => _miListadoProductos;
-  List<Productojson> get miListadoProductosfilter  => _miListadoProductosfilter;
+  List<Productojson> get miListadoProductosScreen => _miListadoProductosScreen;
+  GlobalKey<AnimatedListState> get myListKey => _myListKey;
+
 
 
 
@@ -58,18 +62,62 @@ class CartaModificadores with ChangeNotifier {
   set idItem(int value){
     _idItem = value;
   }
-  set milistadoProductos(List<Productojson> value) {
+  set miListadoProductos(List<Productojson> value) {
     _miListadoProductos = value;
   }
-  set miListadoProductosfilter(List<Productojson> value){
-    _miListadoProductosfilter = value;
+  set miListadoProductosScreen(List<Productojson> value) {
+    _miListadoProductosScreen = value;
+  }
+
+
+  void changeListProduct(String name) {
+    int cantidadAntigua= miListadoProductosScreen.length;
+    int cantidadNuevaBusqueda= _miListadoProductos.where((element) => element.productName.contains(name)).toList().length;
+
+    if(cantidadAntigua>cantidadNuevaBusqueda) {
+      int cantidadEliminar = cantidadAntigua - cantidadNuevaBusqueda;
+      for (var i = 0; i < cantidadEliminar; i++) {
+        _myListKey.currentState.removeItem(0,
+                (BuildContext context, Animation<double> animation) {
+              return Container();
+            });
+      }
+    }
+    if(cantidadAntigua<cantidadNuevaBusqueda) {
+      int cantidadinsertar = cantidadNuevaBusqueda - cantidadAntigua;
+      for (var i = 0; i < cantidadinsertar; i++) {
+        _myListKey.currentState.insertItem(0);
+      }
+    }
+    miListadoProductosScreen = _miListadoProductos.where((element) => element.productName.contains(name)).toList();
+
+    notifyListeners();
+  }
+  void changeListProductreset() {
+    int cantidadAntigua= miListadoProductosScreen.length;
+    int cantidadNuevaBusqueda= miListadoProductos.length;
+
+    if(cantidadAntigua>cantidadNuevaBusqueda) {
+      int cantidadEliminar = cantidadAntigua - cantidadNuevaBusqueda;
+      for (var i = 0; i < cantidadEliminar; i++) {
+        _myListKey.currentState.removeItem(0,
+                (BuildContext context, Animation<double> animation) {
+              return Container();
+            });
+      }
+    }
+    if(cantidadAntigua<cantidadNuevaBusqueda) {
+      int cantidadinsertar = cantidadNuevaBusqueda - cantidadAntigua;
+      for (var i = 0; i < cantidadinsertar; i++) {
+        _myListKey.currentState.insertItem(0);
+      }
+    }
+    miListadoProductosScreen = miListadoProductos;
+    textEditingControllerBusqueda.text = '';
+
     notifyListeners();
   }
 
-  void changeListProduct(String name){
-    _miListadoProductos = _miListadoProductos.where((element) => element.producto==name).toList();
-    notifyListeners();
-  }
 
 
   void mostrarOcultarBarra(){
@@ -88,6 +136,8 @@ class CartaModificadores with ChangeNotifier {
      _textEditingControllerPrecio.text='';
     _textEditingControllerRutaImagen.text='';
     _imagen = null;
+    _idItem = null;
+    _selectedFile = null;
      notifyListeners();
   }
 

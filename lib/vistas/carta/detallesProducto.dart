@@ -1,9 +1,9 @@
-import 'dart:convert';
-import 'dart:html' as html;
-import 'dart:typed_data';
+
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tpv/controladores/http/peticionesCarta.dart';
 import 'package:tpv/providers/carta_providers.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -32,7 +32,7 @@ class _DetallesProductoState extends State<DetallesProducto> {
       builder: (_, modificador, __)=> Container(
         color: Colors.white,
         alignment: Alignment.center,
-        child: Column(
+        child: ListView(
           children: <Widget>[
             Row(
               children: <Widget>[
@@ -41,7 +41,7 @@ class _DetallesProductoState extends State<DetallesProducto> {
                     height: 300,
                     width: 300,
                     child: Center(
-                      child:  modificador.imagen //!= null ? modificador.imagen : Icon(Icons.restaurant, size: 150,)
+                      child:   modificador.imagen
                     ),
                   ),
                 )
@@ -92,7 +92,7 @@ class _DetallesProductoState extends State<DetallesProducto> {
                     minLines: 3,
                     maxLines: 5,
                     decoration: InputDecoration(
-                      labelText: "Ingredicentes:",
+                      labelText: "Ingredientes:",
                       hintText: "Introducir ingredientes",
                       labelStyle: TextStyle(fontSize: 24, height: 0.7),
                       border: InputBorder.none,
@@ -123,12 +123,20 @@ class _DetallesProductoState extends State<DetallesProducto> {
 
   void seleccionarPicker()async{
     final modificador  = Provider.of<CartaModificadores>(context, listen: false);
+
     final picker =  await ImagePicker().getImage(source: ImageSource.gallery);
     setState(() {
-      modificador.imagen = Image.network(picker.path);
+      if(kIsWeb){
+        modificador.imagen = Image.network(picker.path);
+      }else{
+        //Todo
+      }
 
     });
     modificador.selectedFile = await picker.readAsBytes();
+    //Para android
+
+
   }
 
 }

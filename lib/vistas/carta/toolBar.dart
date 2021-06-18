@@ -2,12 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tpv/controladores/accionesPrincipales.dart';
-import 'package:tpv/controladores/http/peticionesCarta.dart';
 import 'package:tpv/controladores/responsive.dart';
-import 'package:tpv/modelo/productojson.dart';
 import 'package:tpv/providers/carta_providers.dart';
 
-import 'itemColumn.dart';
+import 'detallesProducto.dart';
 
 class ToolBar extends StatefulWidget {
   bool _mostrar;
@@ -40,14 +38,13 @@ class _ToolBarState extends State<ToolBar> {
                 heroTag: "BotonNuevo",
                 hoverColor: Colors.blue[700],
                 onPressed: () {
-                  modificador.idProducto = null;
-                  context.read<CartaModificadores>().imagen = null;
-                  if(modificador.imagen != null){
-                    print("Tiene contenido");
-                  }else{
-                    print("No Tiene contenido");
-                  }
                   modificador.resetFormulario();
+                  if(Responsive.isMobile(context)){
+                    Navigator.push( context, MaterialPageRoute(builder: (context) =>
+                        Scaffold(
+                            appBar: AppBar(),
+                            body: DetallesProducto())));
+                  }
                 },
                 child: Icon(Icons.fiber_new_rounded),
               ),
@@ -85,15 +82,6 @@ class _ToolBarState extends State<ToolBar> {
               hoverColor: Colors.blue[700],
               child: Icon(Icons.delete_outline),
             ),
-            FloatingActionButton(
-              heroTag: "buscar",
-              onPressed: () {
-
-                  modificador.changeListProduct(modificador.textEditingControllerBusqueda.text);
-              },
-              hoverColor: Colors.blue[700],
-              child: Icon(Icons.search),
-            ),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.only(right: Responsive.isMobile(context)?  10:80, left: 10),
@@ -113,7 +101,8 @@ class _ToolBarState extends State<ToolBar> {
                     ),
                   ),
                   onChanged: (text){
-                    //print(text);
+                   modificador.changeListProduct(modificador.textEditingControllerBusqueda.text);
+
                     },
                 ),
               ),

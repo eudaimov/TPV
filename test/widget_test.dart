@@ -7,8 +7,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:tpv/main.dart';
 import 'package:tpv/vistas//routes.dart';
 
 void main() {

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tpv/configuracion/configuraciones.dart';
-import 'package:tpv/controladores/http/peticionesCarta.dart';
 import 'package:tpv/controladores/responsive.dart';
 import 'package:tpv/modelo/productojson.dart';
 import 'package:tpv/providers/carta_providers.dart';
@@ -31,26 +30,23 @@ class _ItemListCartaRowState extends State<ItemListCartaRow> {
       child: GestureDetector(
 
         onTap: (){
+          print(modificador.textEditingControllerRutaImagen.text);
           modificador.selectedFile =null;
           modificador.idItem = widget.idItem;
           modificador.idProducto = widget.miproducto.id;
-          modificador.textEditingControllerProducto.text= widget.miproducto.producto;
-          modificador.textEditingControllerIngredientes.text= widget.miproducto.ingrediente;
-          modificador.textEditingControllerCategorias.text = widget.miproducto.categorias;
-          modificador.textEditingControllerPrecio.text = widget.miproducto.precio.toString();
-          modificador.textEditingControllerRutaImagen.text = widget.miproducto.rutaImagen;
-          modificador.imagen =  Image.network(Config.hostbase+"productos/imagen/"+widget.miproducto.rutaImagen);
+          modificador.textEditingControllerProducto.text= widget.miproducto.productName;
+          modificador.textEditingControllerIngredientes.text= widget.miproducto.ingredients;
+          modificador.textEditingControllerCategorias.text = widget.miproducto.categories;
+          modificador.textEditingControllerPrecio.text = widget.miproducto.price.toString();
+          modificador.textEditingControllerRutaImagen.text = widget.miproducto.routeImage;
+          modificador.imagen =  Image.network(Config.hostbase+"productos/imagen/"+widget.miproducto.routeImage);
           if(Responsive.isMobile(context)) {
             Navigator.push( context, MaterialPageRoute(builder: (context) =>
                 Scaffold(
                     appBar: AppBar(),
                     body: DetallesProducto())));
           }
-
-
-
-
-        },
+       },
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
@@ -69,11 +65,10 @@ class _ItemListCartaRowState extends State<ItemListCartaRow> {
                       padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
                             children:<Widget>[
-                              Text(this.widget.miproducto.producto),
-                              Text(this.widget.miproducto.precio.toString()+"€")
+                              Text(this.widget.miproducto.productName),
+                              Text(this.widget.miproducto.price.toString()+"€")
                             ],
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                         )
                     ))
               ]),
